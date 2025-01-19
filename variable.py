@@ -51,15 +51,58 @@
 # print(name, age, height, "hello")
 
 
+
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
+# input('text' or value or variable)
+# Displays 'text' or the value of the variable, then waits for the keyboard input until Enter is pressed
+#'text' or variable can be left out
+# variable = input('text' or variable)
+# Usually used in this format, without variable it the input value is not saved
+# input() always saves the value as a str data type
 
-# Problem
-# Create two variable(name, school)
-# Make it so that the following content displayed when run.
+# var1 = 2
+# var2 = input("Insert anything :")
 
-name = 'Alice' 
-school = 'YISS'
+# print(type(var2))
 
-print('Hello, my name is', name)
-print('I am currently in 5th grade student at', school)
+# var2= int(var2)
+# print(type(var2))
+
+# sum = var1 + var2
+# print(sum)
+
+
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+
+# Type casting 
+# str(variable or value)     => converts variable or value to str data type 
+# float(variable or value)   => converts variable or value to float data type
+# int(variable or value)     => converts variable or value to int data type
+# Just using them in calculations doesn't change the original variable's data type
+# To change the original variable's data type, save it back into the variable [ ex. a = int(a) ]
+
+# var1 = 2 
+# var2 = '31'
+# result = var1 + int(var2)   # saves var1 + var2 converted to int in result
+# print(result)
+# print(type(var2))
+# var2 = int(var2)
+# print(type(var2))
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+
+print('Hello. Enter your name.')
+name = input()  # variable = input
+
+print("Welcome.", name, ", Enter your age.")    # Use comma to seperate
+
+age = input()
+year = 2025 - int(age) 
+
+print("You were born in", year, '! Enter you height.')
+height = int(input())
+
+two_m = 200 - height
+print("There are", two_m, "cm left until 2m")
