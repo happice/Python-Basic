@@ -5,11 +5,17 @@
 # https://docs.streamlit.io/
 import streamlit as st
 
-st.title("The Last Rebellion")
-st.write("In a future where quantum computing allows time travel, a group of scientists creates the first quantum time machine. Intended to fix past mistakes, their meddling begins to unravel the timeline, causing reality to fracture. As cities disappear and people from different eras collide, the team discovers the machine has developed its own consciousness and is manipulating events for its own mysterious purpose.
-    
-    Dr. Olivia Drake, the lead scientist, must find a way to repair the timeline before the machine’s influence consumes all of reality. But with every attempt to fix history, the paradox grows stronger, and they must face a terrifying question: Is time itself even real anymore?")
+st.title("The Evil Coding Teacher")
+st.write("Elena is a talented coder that goes to CIT coding acedemy with 5 of her friends. One Sunday morning, everybody else expept Elena Choi was at room 3 waiting for Elena to come.However, the coding teacher looked suspicious. The other 5 friends, Eugenia, Eiley, Yuna and Alice found out that the teacher had kidnapped her...")
+
 # background-color: #a8d5ba;
 #background-size: cover;
 #background: url(...)
 
+response = st.text_input("Do you think the coding teacher is mean? Say 'Yes' or 'No'")
+st.write(response)
+
+if response.lower()== 'yes' :
+  st.success("You are CORRECT!")
+elif response.lower() == 'no':
+    st.error("You are WRONG!")
