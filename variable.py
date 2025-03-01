@@ -61,16 +61,16 @@
 # Usually used in this format, without variable it the input value is not saved
 # input() always saves the value as a str data type
 
-# var1 = 2
-# var2 = input("Insert anything :")
+var1 = 2
+var2 = input("Insert anything :")
 
-# print(type(var2))
+print(type(var2))
 
-# var2= int(var2)
-# print(type(var2))
+var2= int(var2)
+print(type(var2))
 
-# sum = var1 + var2
-# print(sum)
+sum = var1 + var2
+print(sum)
 
 
 
@@ -93,18 +93,18 @@
 
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
-print('Hello. Enter your name.')
-name = input()  # variable = input
+# print('Hello. Enter your name.')
+# name = input()  # variable = input
 
-print("Welcome.", name, ", Enter your age.")    # Use comma to seperate
+# print("Welcome.", name, ", Enter your age.")    # Use comma to seperate
 
-age = input()
-year = 2025 - int(age) 
+# age = input()
+# year = 2025 - int(age) 
 
-print("You were born in", year, '! Enter you height.')
-height = int(input())
+# print("You were born in", year, '! Enter you height.')
+# height = int(input())
 
-two_m = 200 - height
-print("There are", two_m, "cm left until 2m")
+# two_m = 200 - height
+# print("There are", two_m, "cm left until 2m")
 
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #

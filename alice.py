@@ -5,17 +5,16 @@
 # https://docs.streamlit.io/
 import streamlit as st
 
-st.title("The Evil Coding Teacher")
-st.write("Elena is a talented coder that goes to CIT coding acedemy with 5 of her friends. One Sunday morning, everybody else expept Elena Choi was at room 3 waiting for Elena to come.However, the coding teacher looked suspicious. The other 5 friends, Eugenia, Eiley, Yuna and Alice found out that the teacher had kidnapped her...")
+st.title("Save the Forest")
 
-# background-color: #a8d5ba;
-#background-size: cover;
-#background: url(...)
+description = """
+This game is based on SDGs 15 which is, Life on Land.   
+The main idea of the game is to save the forest and make the air quality better for humans and animals living on land. 
+The player will have to collect trees instead of factories, however if they do get the factory, they will have 3 lives. 
+If they use all 3, they will be eliminated from the game. 
+"""
+st.write(description)
 
-response = st.text_input("Do you think the coding teacher is mean? Say 'Yes' or 'No'")
-st.write(response)
 
-if response.lower()== 'yes' :
-  st.success("You are CORRECT!")
-elif response.lower() == 'no':
-    st.error("You are WRONG!")
+# The player had to collect trees to plant, however if you get a factory 3 times, you get eliminated. 
+
