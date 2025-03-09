@@ -76,10 +76,64 @@
 
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
-print("Enter number.")
-number = int(input())
+# print("Enter number.")
+# number = int(input())
 
-if(number % 2 == 0 ) :      # Forgot ' == 0' 
-    print('Even')
-elif(number % 2 == 1 ) :
-    print('Odd.')
+# if(number % 2 == 0 ) :      # Forgot ' == 0' 
+#     print('Even')
+# elif(number % 2 == 1 ) :
+#     print('Odd.')
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+
+# not   : If True, the result is reto False. If it is False, the result is reversed to True.
+# and   : True if both sides are True, False if even one side is False
+# or    : False if both sides are false, True if at least one side is True 
+# The execution order is executed in order is executed in the order of not, and, or.
+
+# print(not(1 == 1))
+# print((1 != 5) and (10 <= 15))
+# print((6 != 6) or (5 == 3)) 
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+
+
+
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+
+
+# Nested if
+# if can be nested
+
+# age = int(input("Enter your age: "))
+# is_member = input("Are you a member? (yes or not): ")
+
+# if(age >= 18) :
+#     if(is_member == "yes") :
+#         print("Welcome, adult member!")
+#     else :
+#         print("Adult non-member. please sign up.")
+# else : 
+#     if(is_member == "yes") :
+#         print("Welcome, young member!")
+#     else:
+#         print("Young non-member, please sign up.")
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+
+print("Enter two numbers. ")
+number1 = int(input())
+number2 = int(input())
+
+print("What calculation do you want to run?")
+print("(1: Multiply, 2: Divide, 3: Add, 4: Subtract)")
+number = int(input())
+if(number == 1) :
+    print("Selected multiply,", number1, "*", number2, "=", number1*number2)
+elif(number == 2):
+    print("Selected divide,", number1, "/", number2, "=", number1//number2)
+elif(number == 3):
+    print("Selected add,", number1, "+", number2, "=", number1+number2)
+elif(number == 4):
+    print("Selected subtract,", number1, "-", number2, "=", number1-number2)

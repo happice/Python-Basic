@@ -30,25 +30,25 @@
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
 
-# print('text' or variable or numer)
+# print('text' or variable or number)
 # The print() function prints the 'text', number, or value of
 # the variable inside the bracket and then adds a newline
 # To print ,multiple items, use a comma (,)
 # If you use print() with nothing inside, it prints an empty line
 
-# name = 'Alice'
-# age = 10
-# height = 145
-# school = 'YISS' 
-# print(name)
-# print()         # print an empty line
-# print(age)
-# print(height)
-# print('hi')
-# print()
-# print(5)
-# print(5*10)
-# print(name, age, height, "hello")
+name = 'Alice'
+age = 10
+height = 145
+school = 'YISS' 
+print(name)
+print()         # print an empty line
+print(age)
+print(height)
+print('hi')
+print()
+print(5)
+print(5*10)
+print(name, age, height, "hello")
 
 
 
