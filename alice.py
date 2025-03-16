@@ -18,3 +18,4 @@ st.write(description)
 
 # The player had to collect trees to plant, however if you get a factory 3 times, you get eliminated. 
 
+st.image("1.png")
