@@ -26,10 +26,14 @@ def get_base64_image(image_path):
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode()
 
-# Path to the image file.
-image_path = "1.png"  # Change this to your image file path.
-# Encode the image to a base64 string.
-encoded_image = get_base64_image(image_path)
+
+# Paths to the image files.
+image_path_1 = "1.png"  # Path to the first image.
+image_path_2 = "2.png"  # Path to the second image.
+
+# Encode both images to base64 strings.
+encoded_image_1 = get_base64_image(image_path_1)
+encoded_image_2 = get_base64_image(image_path_2)
 
 # HTML code that displays the image with an overlay clickable area.
 html_code = f"""
@@ -57,15 +61,15 @@ html_code = f"""
 <body>
   <div class="container">
     <!-- Display the image using the base64 encoded string -->
-    <img src="data:image/jpeg;base64,{encoded_image}" width="600" alt="Clickable Image">
+    <img id="game-image" src="data:image/png;base64,{encoded_image_1}" width="600" alt="Clickable Image">
     <!-- Div element that acts as the clickable overlay area -->
-    <div class="clickable-area" onclick="handleClick()"></div>
+    <div class="clickable-area" onclick="changeImage()"></div>
   </div>
   <script>
-    // Function that is executed when the clickable area is clicked.
-    function handleClick() {{
-      // Display a JavaScript alert when the area is clicked.
-      window.alert("The clickable area has been clicked!");
+    // Function to change the image when the clickable area is clicked.
+    function changeImage() {{
+      // Change the source of the image to the second image.
+      document.getElementById('game-image').src = "data:image/png;base64,{encoded_image_2}";
     }}
   </script>
 </body>
@@ -74,5 +78,3 @@ html_code = f"""
 
 # Render the custom HTML code within the Streamlit app.
 st.components.v1.html(html_code, height=700)
-
-

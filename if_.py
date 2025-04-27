@@ -98,42 +98,25 @@
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
 
-
-
-# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
-
-
 # Nested if
 # if can be nested
 
-# age = int(input("Enter your age: "))
-# is_member = input("Are you a member? (yes or not): ")
-
-# if(age >= 18) :
-#     if(is_member == "yes") :
-#         print("Welcome, adult member!")
-#     else :
-#         print("Adult non-member. please sign up.")
-# else : 
-#     if(is_member == "yes") :
-#         print("Welcome, young member!")
-#     else:
-#         print("Young non-member, please sign up.")
-
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
-print("Enter two numbers. ")
-number1 = int(input())
-number2 = int(input())
+# print("Enter two numbers. ")
+# number1 = int(input())
+# number2 = int(input())
 
-print("What calculation do you want to run?")
-print("(1: Multiply, 2: Divide, 3: Add, 4: Subtract)")
-number = int(input())
-if(number == 1) :
-    print("Selected multiply,", number1, "*", number2, "=", number1*number2)
-elif(number == 2):
-    print("Selected divide,", number1, "/", number2, "=", number1//number2)
-elif(number == 3):
-    print("Selected add,", number1, "+", number2, "=", number1+number2)
-elif(number == 4):
-    print("Selected subtract,", number1, "-", number2, "=", number1-number2)
+# print("What calculation do you want to run?")
+# print("(1: Multiply, 2: Divide, 3: Add, 4: Subtract)")
+# number = int(input())
+# if(number == 1) :
+#     print("Selected multiply,", number1, "*", number2, "=", number1*number2)
+# elif(number == 2):
+#     print("Selected divide,", number1, "/", number2, "=", number1//number2)
+# elif(number == 3):
+#     print("Selected add,", number1, "+", number2, "=", number1+number2)
+# elif(number == 4):
+#     print("Selected subtract,", number1, "-", number2, "=", number1-number2)
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
