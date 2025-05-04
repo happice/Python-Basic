@@ -30,10 +30,12 @@ def get_base64_image(image_path):
 # Paths to the image files.
 image_path_1 = "1.png"  # Path to the first image.
 image_path_2 = "2.png"  # Path to the second image.
+image_path_3 = "3.png"
 
 # Encode both images to base64 strings.
 encoded_image_1 = get_base64_image(image_path_1)
 encoded_image_2 = get_base64_image(image_path_2)
+encoded_image_3 = get_base64_image(image_path_3)
 
 # HTML code that displays the image with an overlay clickable area.
 html_code = f"""
@@ -41,35 +43,46 @@ html_code = f"""
 <html>
 <head>
   <style>
-    /* Container to hold the image and position the clickable area relative to it */
     .container {{
       position: relative;
       display: inline-block;
     }}
-    /* Clickable area overlay positioned over the image */
     .clickable-area {{
       position: absolute;
-      top: 203px;         /* Distance from the top of the container */
-      left: 262px;       /* Distance from the left of the container */
-      width: 72px;      /* Width of the clickable area */
-      height: 23px;     /* Height of the clickable area */
-      cursor: pointer;   /* Change the mouse pointer to indicate clickable area */
-      border: 2px solid red; /* Red border to visually identify the clickable area */
+      top: 203px;
+      left: 262px;
+      width: 72px;
+      height: 23px;
+      cursor: pointer;
+      border: 2px solid red;
+    }}
+    #game-image {{
+      width: 600px;
+      cursor: pointer;
     }}
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Display the image using the base64 encoded string -->
-    <img id="game-image" src="data:image/png;base64,{encoded_image_1}" width="600" alt="Clickable Image">
-    <!-- Div element that acts as the clickable overlay area -->
-    <div class="clickable-area" onclick="changeImage()"></div>
+  <div class="container" onclick="handleImageClick()">
+    <img id="game-image" src="data:image/png;base64,{encoded_image_1}" alt="Game Image">
+    <div id="clickableArea" class="clickable-area" onclick="handleBoxClick(event)"></div>
   </div>
+
   <script>
-    // Function to change the image when the clickable area is clicked.
-    function changeImage() {{
-      // Change the source of the image to the second image.
-      document.getElementById('game-image').src = "data:image/png;base64,{encoded_image_2}";
+    let currentStage = 1;
+
+    function handleBoxClick(event) {{
+      event.stopPropagation(); // Prevents the parent container click
+      document.getElementById("game-image").src = "data:image/png;base64,{encoded_image_2}";
+      document.getElementById("clickableArea").style.display = "none";
+      currentStage = 2;
+    }}
+
+    function handleImageClick() {{
+      if (currentStage === 2) {{
+        document.getElementById("game-image").src = "data:image/png;base64,{encoded_image_3}";
+        currentStage = 3;
+      }}
     }}
   </script>
 </body>
