@@ -13,9 +13,7 @@ st.title("Save the Forest")
 description = """
 This game is based on SDGs 15 which is, Life on Land.   
 The main idea of the game is to save the forest and make the air quality better for humans and animals living on land. 
-The player will have to destroy the factories instead of cutting down the trees, however if they do get the trees, you will have 3 lives. 
-If they use all 3, they will be eliminated from the game. 
-"""
+The player will have to destroy the factories instead of cutting down the trees, however if when you touch the red box(factories), the box will change into "Clear", when all the red boxes are gone, the will end. """
 st.write(description)
 
 
@@ -32,12 +30,15 @@ image_path_1 = "1.png"  # Path to the first image.
 image_path_2 = "2.png"  # Path to the second image.
 image_path_3 = "3.png"
 plane_image_path = "plane.png"
+clear_image_path = "clear.png"
 
 # Encode both images to base64 strings.
 encoded_image_1 = get_base64_image(image_path_1)
 encoded_image_2 = get_base64_image(image_path_2)
 encoded_image_3 = get_base64_image(image_path_3)
 encoded_plane_image = get_base64_image(plane_image_path)
+encoded_clear_image = get_base64_image(clear_image_path)
+encoded_image_4 = get_base64_image(image_path_4)
 
 html_code = f"""
 <!DOCTYPE html>
@@ -63,27 +64,58 @@ html_code = f"""
     }}
     #plane {{
       position: absolute;
-      top: 100px;  /* Initial position */
+      top: 100px;
       left: 200px;
       width: 100px;
       display: none;
       pointer-events: none;
-      transition: top 0.1s, left 0.1s; /* smooth movement */
+      transition: top 0.1s, left 0.1s;
     }}
+    .red-box {{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    display: none;
+    opacity: 0.8;
+    background-size: cover;      /* 중요: 이미지 꽉 채우기 */
+    background-repeat: no-repeat;
+    background-position: center;
+  }}
   </style>
 </head>
 <body tabindex="0">
   <div class="container" onclick="handleImageClick()">
     <img id="game-image" src="data:image/png;base64,{encoded_image_1}" alt="Game Image">
     <img id="plane" src="data:image/png;base64,{encoded_plane_image}" alt="Plane">
+    
+    <!-- Red Boxes -->
+<div id="box1" class="red-box" style="top: 8px; left: 515px; width: 90px; height: 85px;"></div>
+<div id="box2" class="red-box" style="top: -5px; left: 100px; width: 80px; height: 80px;"></div>
+<div id="box3" class="red-box" style="top: 135px; left: -10px; width: 80px; height: 80px;"></div>
+<div id="box4" class="red-box" style="top: 155px; left: 180px; width: 50px; height: 40px;"></div>
+<div id="box5" class="red-box" style="top: 265px; left: 225px; width: 80px; height: 80px;"></div>
+<div id="box6" class="red-box" style="top: 190px; left: 515px; width: 80px; height: 80px;"></div>
+
     <div id="clickableArea" class="clickable-area" onclick="handleBoxClick(event)"></div>
   </div>
 
   <script>
     let currentStage = 1;
 
+    function isColliding(a, b) {{
+    const rect1 = a.getBoundingClientRect();
+    const rect2 = b.getBoundingClientRect();
+    return !(
+      rect1.right < rect2.left ||
+      rect1.left > rect2.right ||
+      rect1.bottom < rect2.top ||
+      rect1.top > rect2.bottom
+    );
+  }}
+
     function handleBoxClick(event) {{
-      event.stopPropagation(); // Prevents the parent container click
+      event.stopPropagation();
       document.getElementById("game-image").src = "data:image/png;base64,{encoded_image_2}";
       document.getElementById("clickableArea").style.display = "none";
       currentStage = 2;
@@ -93,47 +125,67 @@ html_code = f"""
       if (currentStage === 2) {{
         document.getElementById("game-image").src = "data:image/png;base64,{encoded_image_3}";
         const plane = document.getElementById("plane");
-        plane.style.display = "block";  // Show the plane
+        plane.style.display = "block";
         currentStage = 3;
 
-        // Set initial position
-        plane.style.top = "100px";
-        plane.style.left = "200px";
+        // Reset plane position
+        plane.style.top = "250px";
+        plane.style.left = "0px";
 
-        // Focus to listen keyboard events
+        // Show red boxes
+        for (let i = 1; i <= 6; i++) {{
+          document.getElementById("box" + i).style.display = "block";
+        }}
+
         document.body.focus();
       }}
     }}
 
     document.body.addEventListener('keydown', function(event) {{
       const plane = document.getElementById("plane");
+      const gameImage = document.getElementById("game-image");
       if (currentStage !== 3 || plane.style.display === "none") return;
 
-      // Get current position as numbers
       let top = parseInt(plane.style.top);
       let left = parseInt(plane.style.left);
-      const step = 10;  // Number of pixels to move per key press
+      const step = 10;
+
+      const maxLeft = gameImage.clientWidth - plane.clientWidth;
+      const maxTop = gameImage.clientHeight - plane.clientHeight;
+
+      const clearImage = "data:image/png;base64,{encoded_clear_image}";
 
       switch(event.key) {{
         case 'ArrowUp':
           top = Math.max(0, top - step);
           break;
         case 'ArrowDown':
-          top = Math.min(window.innerHeight - plane.height, top + step);
+          top = Math.min(maxTop, top + step);
           break;
         case 'ArrowLeft':
           left = Math.max(0, left - step);
           break;
         case 'ArrowRight':
-          left = Math.min(window.innerWidth - plane.width, left + step);
+          left = Math.min(maxLeft, left + step);
           break;
         default:
-          return; // exit if other key pressed
+          return;
       }}
 
       plane.style.top = top + "px";
       plane.style.left = left + "px";
-      event.preventDefault();  // prevent page scroll on arrow keys
+      event.preventDefault();
+
+for (let i = 1; i <= 6; i++) {{
+  const box = document.getElementById("box" + i);
+  if (box && box.style.display !== "none" && isColliding(plane, box)) {{
+    // Change the red box to clear.png
+    box.style.backgroundColor = "transparent";
+    box.style.backgroundImage = `url('${{clearImage}}')`;
+  }}
+}}
+
+
     }});
   </script>
 </body>
