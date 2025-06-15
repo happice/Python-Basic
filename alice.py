@@ -13,7 +13,7 @@ st.title("Save the Forest")
 description = """
 This game is based on SDGs 15 which is, Life on Land.   
 The main idea of the game is to save the forest and make the air quality better for humans and animals living on land. 
-The player will have to destroy the factories instead of cutting down the trees, however if when you touch the red box(factories), the box will change into "Clear", when all the red boxes are gone, the will end. """
+The player will have to destroy the factories instead of cutting down the trees, when all the factories change to clear, you win the game.  """
 st.write(description)
 
 
@@ -29,6 +29,7 @@ def get_base64_image(image_path):
 image_path_1 = "1.png"  # Path to the first image.
 image_path_2 = "2.png"  # Path to the second image.
 image_path_3 = "3.png"
+image_path_4 = "4.png"
 plane_image_path = "plane.png"
 clear_image_path = "clear.png"
 
@@ -50,14 +51,27 @@ html_code = f"""
       display: inline-block;
     }}
     .clickable-area {{
-      position: absolute;
-      top: 203px;
-      left: 262px;
-      width: 72px;
-      height: 23px;
-      cursor: pointer;
-      border: 2px solid red;
-    }}
+  position: absolute;
+  top: 203px;
+  left: 262px;
+  width: 72px;
+  height: 23px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  z-index: 10;
+}}
+
+    .red-box {{
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: transparent; 
+  display: none;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  }}
     #game-image {{
       width: 600px;
       cursor: pointer;
@@ -72,15 +86,14 @@ html_code = f"""
       transition: top 0.1s, left 0.1s;
     }}
     .red-box {{
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    background-color: red;
-    display: none;
-    opacity: 0.8;
-    background-size: cover;      /* 중요: 이미지 꽉 채우기 */
-    background-repeat: no-repeat;
-    background-position: center;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: transparent; 
+  display: none;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   }}
   </style>
 </head>
@@ -142,51 +155,79 @@ html_code = f"""
     }}
 
     document.body.addEventListener('keydown', function(event) {{
-      const plane = document.getElementById("plane");
-      const gameImage = document.getElementById("game-image");
-      if (currentStage !== 3 || plane.style.display === "none") return;
+  const plane = document.getElementById("plane");
+  const gameImage = document.getElementById("game-image");
+  if (currentStage !== 3 || plane.style.display === "none") return;
 
-      let top = parseInt(plane.style.top);
-      let left = parseInt(plane.style.left);
-      const step = 10;
+  let top = parseInt(plane.style.top);
+  let left = parseInt(plane.style.left);
+  const step = 10;
 
-      const maxLeft = gameImage.clientWidth - plane.clientWidth;
-      const maxTop = gameImage.clientHeight - plane.clientHeight;
+  const maxLeft = gameImage.clientWidth - plane.clientWidth;
+  const maxTop = gameImage.clientHeight - plane.clientHeight;
 
-      const clearImage = "data:image/png;base64,{encoded_clear_image}";
+  const clearImage = "data:image/png;base64,{encoded_clear_image}";
 
-      switch(event.key) {{
-        case 'ArrowUp':
-          top = Math.max(0, top - step);
-          break;
-        case 'ArrowDown':
-          top = Math.min(maxTop, top + step);
-          break;
-        case 'ArrowLeft':
-          left = Math.max(0, left - step);
-          break;
-        case 'ArrowRight':
-          left = Math.min(maxLeft, left + step);
-          break;
-        default:
-          return;
-      }}
+  switch(event.key) {{
+    case 'ArrowUp':
+      top = Math.max(0, top - step);
+      break;
+    case 'ArrowDown':
+      top = Math.min(maxTop, top + step);
+      break;
+    case 'ArrowLeft':
+      left = Math.max(0, left - step);
+      break;
+    case 'ArrowRight':
+      left = Math.min(maxLeft, left + step);
+      break;
+    default:
+      return;
+  }}
 
-      plane.style.top = top + "px";
-      plane.style.left = left + "px";
-      event.preventDefault();
+  plane.style.top = top + "px";
+  plane.style.left = left + "px";
+  event.preventDefault();
 
-for (let i = 1; i <= 6; i++) {{
+  for (let i = 1; i <= 6; i++) {{
   const box = document.getElementById("box" + i);
   if (box && box.style.display !== "none" && isColliding(plane, box)) {{
-    // Change the red box to clear.png
     box.style.backgroundColor = "transparent";
     box.style.backgroundImage = `url('${{clearImage}}')`;
+    box.setAttribute("data-cleared", "true");
   }}
 }}
 
+// Check if all boxes are cleared
+let allCleared = true;
+for (let i = 1; i <= 6; i++) {{
+  const box = document.getElementById("box" + i);
+  if (box && box.style.display !== "none") {{
+    if (box.getAttribute("data-cleared") !== "true") {{
+      allCleared = false;
+      break;
+    }}
+  }}
+}}
 
-    }});
+if (allCleared) {{
+  setTimeout(() => {{
+    document.getElementById("game-image").src = "data:image/png;base64,{encoded_image_4}";
+
+    // Hide all boxes after the image changes
+    for (let i = 1; i <= 6; i++) {{
+      const box = document.getElementById("box" + i);
+      if (box) {{
+        box.style.display = "none";
+      }}
+    }}
+
+  }}, 3000);
+}}
+
+
+}});
+
   </script>
 </body>
 </html>
