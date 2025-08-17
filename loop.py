@@ -162,7 +162,7 @@
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
 # Create a 1 - 19 multiplication table 
-for x in range(1, 20, 1) :
-    for y in range(1, 10, 1) :
-        print(x, "*", y, "=", x * y)
+# for x in range(1, 20, 1) :
+#     for y in range(1, 10, 1) :
+#         print(x, "*", y, "=", x * y)
         
